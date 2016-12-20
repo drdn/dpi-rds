@@ -1,7 +1,4 @@
-#METADATA SCRAPER - Internet Archive
-#Digital Collections @ University of Maryland, College Park
-#David Durden (durden@umd.edu)
-
+#!/usr/bin/env python2.7
 import sys, urllib, json, csvkit
 from datetime import datetime
 	
