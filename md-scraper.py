@@ -1,5 +1,5 @@
 #!/usr/bin/python
-METADATA SCRAPER - Internet Archive
+#METADATA SCRAPER - Internet Archive
 
 import sys, urllib, json, csvkit
 from datetime import datetime
