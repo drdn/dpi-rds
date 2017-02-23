@@ -1,7 +1,10 @@
-id-generator.py is written in python 3 and requires the internetarchive module. This script uses a single search term to return a list of associated object identifiers. 
+The following modules are required: internetarchive, json, csvkit, urllib.
 
-$ python3 id-generator.py {foo} bar.txt
+md-id.py will create a list of identifiers using two arguments, search term and output file name.
 
-md-scraper.py is written in python 2.7 and requires the json and csvkit modules. This script takes a .txt of object identifiers and returns a .csv that includes the following metadata fields: identifier, addeddate, downloads, title, subject, and collection.
+  $ python md-id.py foo bar.txt
 
-$ python md-scraper.py bar.txt
+md-scraper.py will create a .csv of selected metadata using a list of identifiers.
+Metadata fields pulled: identifier, addeddate, downloads, title, subject, and collection.
+
+  $ python md-scraper.py bar.txt
