@@ -48,11 +48,11 @@ with open(input_file, "r") as f1:
 					writer.writerow(record2)	
 			except:
 				broken_record = {'Identifier': " ".join(jdata['metadata']['identifier']),
-								'Upload Date': " ".join(jdata['metadata']['addeddate']),
-								'Total Views': jdata['item']['downloads'],
-								'Title': " ".join(jdata['metadata']['title']), 
-								'Topic': "0 -- subject is missing",
-								'Collection': "; ".join(jdata['metadata']['collection'])}
+					'Upload Date': " ".join(jdata['metadata']['addeddate']),
+					'Total Views': jdata['item']['downloads'],
+					'Title': " ".join(jdata['metadata']['title']), 
+					'Topic': "0 -- subject is missing",
+					'Collection': "; ".join(jdata['metadata']['collection'])}
 				writer.writerow(broken_record)
 							
 done = '%s %s' % ('Done @', datetime.now())
