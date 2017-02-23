@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#IDENTIFIER GENERATOR - Internet Archive
+
 from internetarchive import search_items
 import sys
 
