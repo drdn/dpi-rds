@@ -12,3 +12,6 @@ The following modules are required: internetarchive, json, csvkit, urllib.
 Metadata fields pulled: identifier, addeddate, downloads, title, subject, and collection.
 
   `$ python md-scraper.py bar.txt`
+
+## Known issues:
+`csvkit` v.1.0.1 does not work with this code. Please use v.0.9.1 if possible. 
