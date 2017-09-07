@@ -22,5 +22,4 @@ with open(sys.argv[2], 'wt') as outfile:
     print writing.format(sys.argv[2]),
     sys.stdout.flush()
     outfile.write('\n'.join(identifiers))
-    fin = "done!"
-    print fin
+    print "done!"
