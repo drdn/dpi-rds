@@ -1,7 +1,10 @@
 #!/usr/bin/python
 #METADATA SCRAPER - Internet Archive
 
-import sys, urllib, json, csvkit
+import sys
+import urllib
+import json
+import csvkit
 from datetime import datetime
 	
 format = '%Y%m%d%H%M'
