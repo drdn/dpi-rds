@@ -1,17 +1,18 @@
-# Internet Archive Metadata Scraper
+## Internet Archive Metadata Collector
 
-## Requirements:
-The following modules are required: internetarchive, json, csvkit, urllib.
+#### Usage:
+**md-id.py** creates a list of identifiers using two arguments, search term and output file name. 
 
-## Usage:
-**md-id.py** will create a list of identifiers using two arguments, search term and output file name.
+*This script requires the Internet Archive Python library.*
 
   `$ python md-id.py foo bar.txt`
 
-**md-scraper.py** will create a .csv of selected metadata using a list of identifiers.
+**md-scraper.py** creates a csv of selected metadata using a list of previously collected identifiers.
 Metadata fields pulled: identifier, addeddate, downloads, title, subject, and collection.
 
   `$ python md-scraper.py bar.txt`
+  
 
-## Known issues:
-`csvkit` v.1.0.1 does not work with this code. Please use v.0.9.1 if possible. 
+
+
+
