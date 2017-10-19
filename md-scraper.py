@@ -9,7 +9,7 @@ import csv
 from datetime import datetime
 
 # Variables
-new_file = '%s-%s%s' % ("scrape_results", datetime.now().strftime('%Y%m%d%H%M'), ".csv")
+new_file = '%s-%s%s' % ("umd_ia_stats-", datetime.now().strftime('%Y%m%d%H%M'), ".csv")
 input_file = sys.argv[1]
 
 print('%s %s' % ('Started @', datetime.now()))
