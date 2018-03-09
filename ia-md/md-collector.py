@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
-'''
-Selective metadata collection script.'''
+
+#----------------------------------------------------------------------------------------
+#
+#   Name:           md-collector.py
+#   Version:        v.2
+#   Date:           2016-00-00
+#   Author:         David Durden
+#   Description:    Uses a list of Internet Archive object ids and returns selected
+#                   metadata elements. Returns a .csv named using datetime.
+#   Usage:          python3 md-collector.py bar.txt
+#   Dependencies:   None.
+#
+#----------------------------------------------------------------------------------------
 
 import sys
 import urllib.request
