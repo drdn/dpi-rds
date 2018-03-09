@@ -7,7 +7,7 @@
 
   `$ python3 md-id.py foo bar.txt`
 
-**md-scraper.py** creates a csv of selected metadata using a list of previously collected identifiers.
+**md-collector.py** creates a csv of selected metadata using a list of previously collected identifiers.
 Metadata fields pulled: identifier, addeddate, downloads, title, subject, and collection.
 
   `$ python3 md-scraper.py bar.txt`
