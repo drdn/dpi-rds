@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
-'''
-Identifier collection script.'''
+
+#----------------------------------------------------------------------------------------
+#
+#   Name:           md-id.py
+#   Version:        v.2
+#   Date:           2016-00-00
+#   Author:         David Durden
+#   Description:    Searches the Internet Archive for a provided term and generates
+#                   a list of item ids related to that serach term.
+#   Usage:          python3 md-id.py foo bar.txt
+#   Dependencies:   Requires the internetarchive library
+#                   <https://pypi.python.org/pypi/internetarchive>
+#
+#----------------------------------------------------------------------------------------
 
 import sys
 from internetarchive import search_items
