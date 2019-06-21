@@ -3,8 +3,8 @@
 #=============================================#
 #    title: reverse-saf.py                    #
 #    author: David Durden <durden@umd.edu>    #
-#    version: 1.0                             #
-#    date: 2019-06-17                         #
+#    version: 1.1                             #
+#    date: 2019-06-21                         #
 #=============================================#
 
 import sys
@@ -16,6 +16,12 @@ import xml.dom.minidom as minidom
 
 #==arguments==
 file = sys.argv[1] # Supply a list of handles
+
+#==classes==
+class MissingRDFDescriptionException(Exception):
+    def __str__(self):
+        return "No rdf:Description found"
+# To do: refactor functions with shared data as a class
 
 #==functions==
 def queryMaker(handle, prefix):
@@ -62,14 +68,17 @@ def RDFparser(handle):
     handle = handle.strip()
     r_file = minidom.parse("{0}.rdf".format(handle))
     rElem = r_file.getElementsByTagName('rdf:Description')
-    parser_output = "{0}.txt".format(handle)
-    for index, element in enumerate(rElem):
-        if element.childNodes[3].firstChild.nodeValue == 'ORIGINAL':
-            with open(parser_output, 'a') as po:
-                po.write("{0}\n".format(element.attributes['rdf:about'].value))
-                print("\tWriting selected bitstreams to text file: {0}...".format(parser_output))
-        else:
-            pass
+    if rElem:
+        parser_output = "{0}.txt".format(handle)
+        for element in rElem:
+            if element.childNodes[3].firstChild.nodeValue == 'ORIGINAL':
+                with open(parser_output, 'a') as po:
+                    po.write("{0}\n".format(element.attributes['rdf:about'].value))
+                    print("\tWriting selected bitstreams to text file: {0}...".format(parser_output))
+            else:
+                pass
+    else:
+        raise MissingRDFDescriptionException()
 
 def bitstreamDownloader(handle):
     '''
@@ -79,17 +88,25 @@ def bitstreamDownloader(handle):
     handle = handle.rstrip()
     file = '{0}.txt'.format(handle)
     bitDir = "bitstreams"
-    with open(file, 'r') as f:
+    with open(file, 'r') as f, open("error_log.txt", 'w') as er:
         dirMaker(bitDir)
         for line in f:
             line = line.strip()
             if line.find('/'):
                 file_name = line.rsplit('/', 1)[-1]
-                r = requests.get(line)
-                open(file_name, 'wb').write(r.content)
-                # To do : Should probably check file size and request user input to 
-                # continue for files larger than 2GB...
-                print("\tDownloading {0}...".format(file_name))
+                head = requests.head(line, allow_redirects=True)
+                size = int(head.headers['Content-Length'])
+                print("{0} is {1} bytes".format(file_name, size))
+                GB = 2**30
+                if size < GB/4:
+                    print("\tDownloading {0}...".format(file_name))
+                    r = requests.get(line)
+                    open(file_name, 'wb').write(r.content)
+                    # To do : Should probably check file size and request user input to 
+                    # continue for files larger than 2GB...
+                else:
+                    print("NO! Do not want!")
+                    er.write(f"{file_name} {size}\n")
 
 # To do: Need to define a function to write XML to CSV
 
@@ -100,7 +117,11 @@ with open(file, 'r') as f:
         dirMaker(row)
         collector(row, 'oai_dc', 'xml')
         collector(row, 'ore', 'rdf')
-        RDFparser(row)
-        bitstreamDownloader(row)
-        os.chdir(path)
+        try: 
+            RDFparser(row)
+            bitstreamDownloader(row)
+        except MissingRDFDescriptionException as e:
+            print(e)
+        finally:
+            os.chdir(path)
     print("Done!")
